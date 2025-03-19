@@ -30,9 +30,6 @@ export const loginAsync = createAsyncThunk(
 );
 
 export const authUserAsync = createAsyncThunk("auth/me", async (token) => {
-
-  console.log(token)
-
   const { data } = await axios.get(`${apiUrl}/me`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -42,14 +39,24 @@ export const authUserAsync = createAsyncThunk("auth/me", async (token) => {
   return data;
 });
 
+export const fetchUsers = createAsyncThunk("auth/fetchUser", async (token) => {
+  const { data } = await axios.get(`${apiUrl}/owners`,{
+    headers:{
+      'Authorization':`Bearer ${token}`
+    }
+  });
+  return data;
+})
+
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: JSON.parse(localStorage.getItem("token") || null),
+    token: localStorage.getItem("token") || null,
     user: {},
     isAuthenticated: false,
     status: "idle",
     error: null,
+    owners:[]
   },
   reducers: {
     resetStatus: (state) => {
@@ -79,7 +86,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(loginAsync.fulfilled, (state, action) => {
       state.status = "success";
-      localStorage.setItem("token", JSON.stringify(action.payload));
+      localStorage.setItem("token", action.payload);
       state.token = action.payload;
       state.isAuthenticated = true
     });
@@ -93,12 +100,24 @@ export const authSlice = createSlice({
     builder.addCase(authUserAsync.fulfilled, (state, action) => {
       state.status = "success";
       state.user = action.payload;
+      state.isAuthenticated = true;
     });
     builder.addCase(authUserAsync.rejected, (state, action) => {
       state.status = "failed";
       state.error = action.payload;
     });
-  },
+    builder.addCase(fetchUsers.pending, (state) => {
+      state.status = 'loading'
+    })
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.status = 'success';
+      state.owners = action.payload
+    })
+    builder.addCase(fetchUsers.rejected, (state) => {
+      state.status = 'failed';
+      state.error = 'failed to get all users'
+    })
+  }
 });
 
 export const { resetStatus , logout} = authSlice.actions;
