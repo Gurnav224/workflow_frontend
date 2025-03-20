@@ -2,15 +2,29 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const apiUrl = "http://localhost:8888/tags";
+const apiUrl = "http://localhost:8888";
 
 export const fetchTags = createAsyncThunk("task/fetchTags", async (token) => {
-    const { data } = await axios.get(`${apiUrl}/all`,{
+    const { data } = await axios.get(`${apiUrl}/tags/all`,{
         headers:{
             'Authorization':`Bearer ${token}`
         }
     });
     return data
+})
+
+export const fetchTask = createAsyncThunk("task/fetchTask", async () => {
+    const { data} = await axios.get(`${apiUrl}/tasks/all`);
+    return data;
+})
+
+export const addTaskAsync = createAsyncThunk("task/addTaskAsync", async (task, {rejectWithValue}) => {
+    try {
+        const {data } = await axios.post(`${apiUrl}/tasks/new`,task);
+        return  data
+    } catch (error) {
+        return rejectWithValue(error.response.data.error)
+    }
 })
 
 
@@ -36,6 +50,28 @@ export const taskSlice = createSlice({
             builder.addCase(fetchTags.rejected, (state) => {
                 state.status = 'failed';
                 state.error = 'failed to get the tags'
+            })
+            builder.addCase(fetchTask.pending, (state) => {
+                state.status = 'loading';
+            })
+            builder.addCase(fetchTask.fulfilled, (state , action) => {
+                state.status = 'success';
+                state.tasks = action.payload;
+            })
+            builder.addCase(fetchTask.rejected, (state) => {
+                state.status = 'failed';
+                state.error = 'failed to fetch the tasks'
+            })
+            builder.addCase(addTaskAsync.pending, (state) => {
+                state.status = 'loading'
+            })
+            builder.addCase(addTaskAsync.fulfilled, (state, action) => {
+                state.status = 'success';
+                state.tasks = [...state.tasks, action.payload]
+            })
+            builder.addCase(addTaskAsync.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload
             })
     }
 })
