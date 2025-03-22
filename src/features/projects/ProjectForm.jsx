@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { addProjectAsync } from "./projectSlice";
 
+
+
 const ProjectForm = () => {
     const { error,  status} = useSelector((state) => state.project);
     const dispatch = useDispatch();
     const [project , setProject] = useState({
         name:"",
-        description:""
+        description:"",
+        status:""
     })
 
     const handleInputChange = (e) => {
@@ -23,9 +26,13 @@ const ProjectForm = () => {
         dispatch(addProjectAsync(project))
         setProject({
             name:"",
-            description:""
+            description:"",
+            status:""
         })
     }
+
+const projectStatus = ["To Do", "In Progress", "Completed", "Blocked"];
+
 
 
   return (
@@ -62,6 +69,20 @@ const ProjectForm = () => {
           placeholder="Enter project description"
           required
         ></textarea>
+      </div>
+      <div>
+        <label htmlFor="status" className="block text-sm font-medium text-gray-700">Select Status</label>
+        <select 
+        value={project.status}
+        onChange={handleInputChange}
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+         name="status" id="status">
+          {
+          projectStatus.map((stat) => (
+          <option value={stat}>{stat}</option>
+          )  )
+          }
+        </select>
       </div>
       {status === 'loading' && <p>loading...</p>}
       {error && <p>{error}</p>}

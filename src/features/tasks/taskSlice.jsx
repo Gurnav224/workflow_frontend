@@ -13,9 +13,14 @@ export const fetchTags = createAsyncThunk("task/fetchTags", async (token) => {
     return data
 })
 
-export const fetchTask = createAsyncThunk("task/fetchTask", async () => {
-    const { data} = await axios.get(`${apiUrl}/tasks/all`);
+export const fetchTask = createAsyncThunk("task/fetchTask", async (status, {rejectWithValue}) => {
+    
+    try {
+        const { data} = await axios.get(`${apiUrl}/tasks/all?status=${status}`);
     return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data.error)
+    }
 })
 
 export const addTaskAsync = createAsyncThunk("task/addTaskAsync", async (task, {rejectWithValue}) => {
@@ -57,10 +62,12 @@ export const taskSlice = createSlice({
             builder.addCase(fetchTask.fulfilled, (state , action) => {
                 state.status = 'success';
                 state.tasks = action.payload;
+                state.error = null;
             })
-            builder.addCase(fetchTask.rejected, (state) => {
+            builder.addCase(fetchTask.rejected, (state , action) => {
                 state.status = 'failed';
-                state.error = 'failed to fetch the tasks'
+                state.error = action.payload
+                state.tasks = []
             })
             builder.addCase(addTaskAsync.pending, (state) => {
                 state.status = 'loading'
