@@ -13,7 +13,6 @@ function App() {
   return (
     <BrowserRouter>
       <Toaster />
-      <Header />
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
