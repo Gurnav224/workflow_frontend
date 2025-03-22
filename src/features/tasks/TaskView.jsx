@@ -1,9 +1,11 @@
+import Sidebar from "../../components/Sidebar"
 import TaskForm from "./TaskForm"
 import TaskList from "./TaskList"
 
 const TaskView = () => {
   return (
-    <div>
+    <div className="flex">
+      <Sidebar/>
       <TaskForm/>
       <TaskList/>
     </div>
