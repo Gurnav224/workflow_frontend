@@ -6,7 +6,6 @@ const ProjectView = () => {
   return (
     <div className="flex">
        <Sidebar/>
-      <ProjectForm/>
       <ProjectList/>
     </div>
   )
