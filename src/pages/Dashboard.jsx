@@ -58,7 +58,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchTask(status))
-  },[status])
+  },[status]) 
+
 
   return (
     <div className="flex h-screen bg-gray-100">
