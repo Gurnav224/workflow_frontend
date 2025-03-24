@@ -28,7 +28,7 @@ const TaskList = () => {
           <p>Project:  {task.project.name}</p>
           <p>Team Members {task.owners.map((owner) => owner.name)}</p>
           <p>Team: {task.team.name}</p>
-          <p>Status: {task.status}</p>
+          <p>{task.status}</p>
           <p>Time To Complete: {task.timeToComplete} Days</p>
         </div>
       ))}

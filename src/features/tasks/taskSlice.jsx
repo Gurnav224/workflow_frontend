@@ -13,10 +13,10 @@ export const fetchTags = createAsyncThunk("task/fetchTags", async (token) => {
     return data
 })
 
-export const fetchTask = createAsyncThunk("task/fetchTask", async (status, {rejectWithValue}) => {
-    
+export const fetchTask = createAsyncThunk("task/fetchTask", async (query, {rejectWithValue}) => {
+   console.log(query)
     try {
-        const { data} = await axios.get(`${apiUrl}/tasks/all?status=${status}`);
+        const { data} = await axios.get(`${apiUrl}/tasks/all?${query}`);
     return data;
     } catch (error) {
         return rejectWithValue(error.response.data.error)
