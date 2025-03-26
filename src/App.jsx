@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import ProjectView from "./features/projects/ProjectView";
 import TeamView from "./features/team/TeamView";
 import TaskView from "./features/tasks/TaskView";
+import Projects from "./pages/Projects";
 
 function App() {
   return (
@@ -28,9 +29,17 @@ function App() {
           path="/project"
           element={
             <PrivateRoutes>
-              <ProjectView />
+              <Projects/>
             </PrivateRoutes>
           }
+        />
+        <Route
+        path="/project/:projectId"
+        element={
+          <PrivateRoutes>
+            <ProjectView />
+          </PrivateRoutes>
+        }
         />
         <Route
           path="/team"
