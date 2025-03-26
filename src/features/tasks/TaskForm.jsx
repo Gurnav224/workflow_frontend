@@ -17,6 +17,8 @@ const TaskForm = () => {
     team: "",
     timeToComplete: 0,
     status: "",
+    priority:"",
+    dueDate:""
   });
   const [selectedOwner, setSelectedOwner] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -83,8 +85,10 @@ const TaskForm = () => {
     setSelectedTags([])
   };
 
+  const priority = ['High', 'Medium', 'Low'];
+
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200 my-5">
+    <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-200">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">Add New Task</h1>
 
       <form className="space-y-4" onSubmit={handleAddNewTask}>
@@ -94,7 +98,7 @@ const TaskForm = () => {
             htmlFor="project"
             className="block text-sm font-medium text-gray-700"
           >
-            Select Project
+            Project
           </label>
           <select
             name="project"
@@ -103,6 +107,7 @@ const TaskForm = () => {
             onChange={handleInputChange}
             value={newTask.project}
           >
+          <option value="">select project</option>
             {projects.map((project) => (
               <option key={project._id} value={project._id}>
                 {project.name}
@@ -186,7 +191,23 @@ const TaskForm = () => {
             isMulti
           />
         </div>
-
+        {/* Due Date */}
+        <div>
+          <label className="block text-sm font-medium" htmlFor="dueDate">Due Date</label>
+          <input   className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" type="date" name="dueDate" id="dueDate" value={newTask.dueDate} onChange={handleInputChange}  />
+        </div>
+        {/* Select Priority */}
+            <div>
+              <label htmlFor="priority">Priority</label>
+              <select className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" name="priority" id="priority" onChange={handleInputChange}>
+                <option value="">Select</option>
+                {
+                 priority.map((pri) => (
+                  <option value={pri} key={pri}>{pri}</option>
+                 ))
+                }
+              </select>
+            </div>
         {/* Time To Complete */}
         <div>
           <label

@@ -13,10 +13,9 @@ export const fetchTags = createAsyncThunk("task/fetchTags", async (token) => {
     return data
 })
 
-export const fetchTask = createAsyncThunk("task/fetchTask", async (query, {rejectWithValue}) => {
-   console.log(query)
+export const fetchTask = createAsyncThunk("task/fetchTask", async (query , {rejectWithValue}) => {
     try {
-        const { data} = await axios.get(`${apiUrl}/tasks/all?${query}`);
+        const { data} = await axios.get(`${apiUrl}/tasks/all?${query ? `${query}`:``}`);
     return data;
     } catch (error) {
         return rejectWithValue(error.response.data.error)

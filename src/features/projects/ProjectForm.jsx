@@ -79,7 +79,7 @@ const projectStatus = ["To Do", "In Progress", "Completed", "Blocked"];
          name="status" id="status">
           {
           projectStatus.map((stat) => (
-          <option value={stat}>{stat}</option>
+          <option key={stat} value={stat}>{stat}</option>
           )  )
           }
         </select>
