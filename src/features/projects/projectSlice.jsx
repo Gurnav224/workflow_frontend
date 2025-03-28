@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiUrl = "http://localhost:8888/project";
+const apiUrl = `${import.meta.env.VITE_API_URL}/project`;
 
 export const addProjectAsync = createAsyncThunk(
   "project/addProjectAsync",
@@ -19,7 +19,7 @@ export const addProjectAsync = createAsyncThunk(
 export const fetchProject = createAsyncThunk(
   "project/getProjectAsync",
   async (query) => {
-    const { data } = await axios.get(`${apiUrl}/all?${query}`);
+    const { data } = await axios.get(`${apiUrl}/all${query ? '?' + query : ''}`);
     return data;
   }
 );

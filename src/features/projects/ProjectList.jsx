@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTags, fetchTask } from "../tasks/taskSlice";
 import { fetchUsers } from "../auth/authSlice";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { fetchProjectById, sortHighToLow, sortLowToHigh, sortNewestByDate, sortOldestByDate } from "./projectSlice";
 import TaskForm from "../tasks/TaskForm";
 import moment from "moment";
@@ -266,7 +266,9 @@ const ProjectList = () => {
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right">→</td>
+                  <td className="px-4 py-3 text-right text-3xl">
+                    <Link className="text-blue-500" to={`/task/${task._id}`}>→</Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
