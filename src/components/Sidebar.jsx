@@ -44,11 +44,11 @@ const Sidebar = () => {
             📑 Reports
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/settings" className="flex items-center gap-2 hover:text-purple-500">
             ⚙️ Settings
           </Link>
-        </li>
+        </li> */}
         <li>
         <button
             onClick={handleLogout}
