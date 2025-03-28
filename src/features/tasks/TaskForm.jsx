@@ -35,7 +35,7 @@ const TaskForm = () => {
     label: tag.name,
   }));
 
-  const status = ["To Do", "In Progress", "Completed", "Blocked"];
+  const status = ["To Do", "In Progress", "Completed","Closed"];
 
   useEffect(() => {
     dispatch(fetchUsers(token));

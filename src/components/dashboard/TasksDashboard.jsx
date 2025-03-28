@@ -101,7 +101,7 @@ const TasksDashboard = () => {
           <div className="fixed inset-0 flex justify-center items-center bg-gray-300 opacity-90 ">
             <div className="bg-white rounded-lg w-4xl  p-6">
               <div className="flex justify-between items-center ">
-                <h3 className="font-medium">Create new Task</h3>
+              <h3 className="font-medium">Create new Task</h3>
                 <button
                   className="font-bold text-xl"
                   onClick={() => setTaskModal(false)}

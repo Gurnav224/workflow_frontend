@@ -4,10 +4,11 @@ import TeamList from './TeamList'
 import Sidebar from '../../components/Sidebar'
 
 const TeamView = () => {
+
   return (
     <div className='flex'>
     <Sidebar/>
-    <TeamForm/>
+    {/* <TeamForm/> */}
     <TeamList/>
     </div>
   )

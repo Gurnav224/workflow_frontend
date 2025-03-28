@@ -31,7 +31,7 @@ const ProjectForm = () => {
         })
     }
 
-const projectStatus = ["To Do", "In Progress", "Completed", "Blocked"];
+const projectStatus = ["To Do", "In Progress", "Completed", "Closed"];
 
 
 

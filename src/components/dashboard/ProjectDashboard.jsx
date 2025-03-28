@@ -75,7 +75,7 @@ const ProjectDashboard = () => {
         {loading === "loading" && <p>loading........</p>}
 
         <div className="grid grid-cols-3 gap-4">
-          {projects.map((project) => (
+          {projects?.map((project) => (
             <div
               key={project._id}
               className="bg-white p-4 shadow-md rounded-lg"
