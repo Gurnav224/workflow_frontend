@@ -15,7 +15,7 @@ Workflow is a project management application that helps teams and individuals ea
 
 
 ## Demo Video
-Watch a walkthrough (5–7 minutes) of all major features of this app:
+Watch a walkthrough  of all major features of this app:
 [Loom Video Link](https://youtu.be/Hr-5BFpETAo?si=68sfzTkMI0tSlhaW)
 
 ## Features
