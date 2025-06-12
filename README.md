@@ -13,6 +13,11 @@ Workflow is a project management application that helps teams and individuals ea
 > username:  `johndoe@gmail.com` <br>
 > password: `pass@123`
 
+
+## Demo Video
+Watch a walkthrough (5–7 minutes) of all major features of this app:
+[Loom Video Link](https://youtu.be/Hr-5BFpETAo?si=68sfzTkMI0tSlhaW)
+
 ## Features
 
 - **User Authentication**: Sign up and login functionality with secure token-based authentication.
